@@ -1,0 +1,199 @@
+/* pages/game_started.wxss */
+.container{
+    /* background-color: #f4eeff; */
+    background-color: #faf4ff;
+    min-height: 100vh;
+    /* 覆盖一下app.wxss的container */
+    padding-top: 60rpx;
+    padding-bottom: 140rpx;
+}
+
+.prompt text{
+    font-family:'songti';
+    color:#424874;
+    font-weight: 160;
+    font-size: 14pt;
+}
+
+.prompt{
+    /* background-color: green; */
+    margin-bottom: 15rpx;
+    margin-top: 35rpx;
+    
+}
+
+.num_prompt{
+    text-align: center;
+    margin-top:8rpx;
+}
+
+.num_prompt text{
+    font-family:'songti';
+    color:#42487456;
+    font-weight: 160;
+    font-size: 12pt;
+}
+
+.players_box{
+    /* background-color: #f4eeff; */
+    background-color: white;
+    /* background-color: red; */
+    min-height: 70vh;
+    /* margin-top: -7000rpx; */
+    padding-top:30rpx;
+    border-radius: 20rpx;
+    width: 70%;
+    padding:40rpx;
+    /* text-align: center; */
+    display: flex;
+    flex-direction: column;
+
+  }
+  
+  .player text{
+    font-family:'songti';
+    /* color:#424874; */
+    color:#71748a;
+    align-self:center;
+    /* font-weight: 700;
+    font-size: 20pt; */
+  }
+
+  .player_bar{
+    display:flex;
+    /* align-items: center; */
+    /* flex-direction: column; */
+    background-color: white;
+    justify-self: center;
+    /* background-color: green; */
+
+}
+
+.players{
+  display:flex;
+  /* align-items: center; */
+  flex-direction: column;
+  min-height: 50vh;
+  background-color: white;
+  justify-self: start;
+  margin-bottom: 60rpx;
+  /* background-color: green; */
+
+}
+
+open-data{
+  font-family:'songti';
+  color:#aaa;
+  align-self:center;
+  align-items: center;
+  /* font-weight: 700;
+  font-size: 20pt; */
+  text-align: center;
+}
+
+.player{
+    text-align: center;
+    width: 170rpx;
+    height: 220rpx;
+}
+  
+  .userinfo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #aaa;
+  }
+  
+  .userinfo-avatar {
+    overflow: hidden;
+    width: 128rpx;
+    height: 128rpx;
+    margin: 20rpx;
+    border-radius: 50%;
+  }
+  
+  .usermotto {
+    margin-top: 200px;
+  }
+  
+  .usermotto text{
+    font-family:'songti';
+    color:#424874;
+    font-weight: 200;
+    font-size: 20pt;
+  }
+
+  .btn_container{
+    background-color:transparent;
+    /* background-color:red; */
+    /* height:100rpx; */
+    /* width:100%; */
+    padding:10%;
+    display: flex;
+    justify-content:center;
+    align-items: center;
+    /* padding-top:20%;
+    width: 100%;
+    padding-left: 50%; */
+
+    font-family:'songti';
+    font-weight: 800;
+
+    flex-direction:column;
+
+}
+
+l-button{
+    margin-bottom: 20rpx;
+}
+
+.cancel_back {
+
+    background-color: #faf4ff;
+    color:#6867ac;
+    height: 80rpx;
+    font-size: 36rpx;
+    margin-bottom: 20rpx;
+    
+}
+
+.start_btn {
+    background-color: #6867ac;
+    color:white;
+    height: 80rpx;
+    font-size: 36rpx;
+    margin-bottom: 20rpx;
+    font-family: "songti";
+    
+}
+
+.start_btn_forbidden {
+  background-color: #7667ac6c;
+  color:white;
+  height: 80rpx;
+  font-size: 36rpx;
+  margin-bottom: 20rpx;
+  font-family: "songti";
+  
+}
+
+.player{
+    display:flex;
+    flex-direction: column;
+    background-color:transparent;
+    /* align-self: center; */
+    border-radius: 8rpx;
+}
+
+.avatar{
+    width: 128rpx;
+    height: 128rpx;
+    margin: 20rpx;
+    border-radius: 50%;
+}
+
+.icon_name text{
+  /* font-family: 'Monospaced Number,Chinese Quote,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,PingFang SC,Hiragino Sans GB,Microsoft YaHei,Helvetica Neue,Helvetica,Arial,sans-serif!important'; */
+  font-size: 11pt;
+  /* letter-spacing: 1pt; */
+}

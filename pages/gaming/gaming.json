@@ -1,0 +1,7 @@
+{
+  "usingComponents": {
+    "l-radio":"/lin-ui/dist/radio/index",
+    "l-radio-group":"/lin-ui/dist/radio-group/index"
+  },
+  "enablePullDownRefresh":true
+}

@@ -1,0 +1,12 @@
+{
+  "usingComponents": {
+    "l-popup":"/lin-ui/dist/popup/index",
+    "l-counter":"/lin-ui/dist/counter/index",
+    "l-radio":"/lin-ui/dist/radio/index",
+    "l-radio-group":"/lin-ui/dist/radio-group/index",
+    "l-steps":"/lin-ui/dist/steps/index",
+    "l-step":"/lin-ui/dist/step/index",
+    "l-button":"/lin-ui/dist/button/index",
+    "l-input":"/lin-ui/dist/input/index"
+  } 
+}

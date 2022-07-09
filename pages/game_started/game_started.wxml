@@ -1,0 +1,86 @@
+<!--pages/game_started.wxml-->
+<view class="container">
+    <view class="prompt">
+        <text>房间号：{{latest_room}} 正在等待玩家进入...</text>
+        <view class="num_prompt">
+            <text>{{cur_plr_num}}/{{plr_num}}</text>
+        </view>
+    </view>
+
+    <view class="players_box">
+        <view class="num_prompt" wx:if="{{!cur_players.length}}">
+            <text>加载中...</text>
+        </view>
+
+        <!-- 遍历已经输入房间号加入对局的userInfos -->
+        <view class="players">
+            <view class="player_bar">
+                <block wx:for="{{cur_players}}" data-item="item" data-index="{{index}}" wx:if="{{!(index>2)}}">
+                <view id="player_{{index}}" class='player'>
+                    <image class="avatar" src="{{item.avatarurl}}" ></image>
+                    <view class='icon_name'> <text>{{item.nickname}}</text> </view>
+                </view>
+                </block>
+            </view>
+            <view class="player_bar">
+                <block wx:for="{{cur_players}}" data-item="item" data-index="{{index}}" wx:if="{{(index>2)&&(!(index>5))}}">
+                <view id="player_{{index}}" class='player'>
+                    <image class="avatar" src="{{item.avatarurl}}" ></image>
+                    <view class='icon_name'> <text>{{item.nickname}}</text> </view>
+                </view>
+                </block>
+            </view>
+            <view class="player_bar">
+                <block wx:for="{{cur_players}}" data-item="item" data-index="{{index}}" wx:if="{{(index>5)&&(!(index>8))}}">
+                <view id="player_{{index}}" class='player'>
+                    <image class="avatar" src="{{item.avatarurl}}" ></image>
+                    <view class='icon_name'> <text>{{item.nickname}}</text> </view>
+                </view>
+                </block>
+            </view>
+            <view class="player_bar">
+                <block wx:for="{{cur_players}}" data-item="item" data-index="{{index}}" wx:if="{{(index>8)&&(!(index>11))}}">
+                <view id="player_{{index}}" class='player'>
+                    <image class="avatar" src="{{item.avatarurl}}" ></image>
+                    <view class='icon_name'> <text>{{item.nickname}}</text> </view>
+                </view>
+                </block>
+            </view>
+
+            <view class="player_bar">
+                <block wx:for="{{cur_players}}" data-item="item" data-index="{{index}}" wx:if="{{(index>11)&&(!(index>14))}}">
+                <view id="player_{{index}}" class='player'>
+                    <image class="avatar" src="{{item.avatarurl}}" ></image>
+                    <view class='icon_name'> <text>{{item.nickname}}</text> </view>
+                </view>
+                </block>
+            </view>
+
+            <view class="player_bar">
+                <block wx:for="{{cur_players}}" data-item="item" data-index="{{index}}" wx:if="{{(index>14)&&(!(index>17))}}">
+                <view id="player_{{index}}" class='player'>
+                    <image class="avatar" src="{{item.avatarurl}}" ></image>
+                    <view class='icon_name'> <text>{{item.nickname}}</text> </view>
+                </view>
+                </block>
+            </view>
+            
+        </view>
+
+
+        <view class="btn_container">
+            <button wx:if="{{cur_plr_num==plr_num && openid==creator && waiting==false}}" class="start_btn" style="width: 400rpx; margin-top:10rpx;" bindtap="startGame" >开局</button>
+            <view class="num_prompt" style="margin-bottom: 50rpx;" wx:if="{{waiting==true && openid==creator}}">
+                    <text>发牌中，请稍等...</text>
+            </view>
+            <view class="num_prompt" wx:if="{{not_open_yet==true && openid!=creator}}">
+                    <text>等待房主点击开局...</text>
+            </view>
+            <button wx:if="{{cur_plr_num==plr_num && openid!=creator}}" class='{{not_open_yet?"start_btn_forbidden":"start_btn"}}' style="width: 400rpx; margin-top:10rpx;" bindtap="joinGame" >入局</button>
+            <button class='{{cur_plr_num!=plr_num? "start_btn" : "cancel_back" }}' style="width: 400rpx; margin-top:10rpx;"bindtap="back" >取消</button>
+        </view>
+
+    </view>
+
+</view>
+

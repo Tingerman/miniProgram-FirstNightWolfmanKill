@@ -1,0 +1,520 @@
+<!--pages/game_started.wxml-->
+<view class="container">
+    <view class="prompt">
+        <text>房间号：{{room}} 对局进行中...</text>
+        <!-- <text>房间号：2173 对局进行中...</text> -->
+    </view>
+
+    <view class="gaming_box">
+
+        <!-- 第一页：点击领取身份 -->
+        <view class="step_1" wx:if="{{step==1}}">
+            <view class="btn_shenfen"  bindtap="shenFen" wx:if="{{cur_number!=100}}">
+                <image id="question_icon" src="./images/question5.svg" ></image>
+                <!-- <image id="question_icon" src="./images/question4.svg" ></image> -->
+            </view>
+
+            <view class="btn_shenfen" wx:if="{{cur_number==100}}">
+                <image id="question_icon" src="./images/question5.svg" ></image>
+                <!-- <image id="question_icon" src="./images/question4.svg" ></image> -->
+            </view>
+
+            <view class="btn_prompt">
+                <view class="btn_textbox" bindtap="shenFen" wx:if="{{cur_number!=100}}"><text>— 点击领取你的身份 —</text></view>
+
+                <view class="loading_prompt" wx:if="{{cur_number==100}}">
+                        <text>稍等，身份获取中...</text>
+                </view>
+            </view>
+        </view>
+
+        <!-- 第二页：查看身份 -->
+        <view class="step_2" wx:if="{{step==2}}">
+            <view class="prompt" bindtap="shenFen"><text>— 你的身份是：{{roles[cur_role_id].role}} —</text></view>
+            <view class="show_shenfen">
+                <image class="shenfen_icon" src="{{roles[cur_role_id].img}}" ></image>
+                <!-- <image id="question_icon" src="./images/question4.svg" ></image> -->
+            </view>
+
+            <view class="btn_container">
+                <button class='{{step2_ready?"start_btn_forbidden":"start_btn"}}' style="width: 400rpx; margin-top:80rpx;"bindtap="shenfenReady" wx:if="{{!step2_all_ready}}">就 绪</button>
+                <view class="num_prompt" wx:if="{{step2_ready && !step2_all_ready}}">
+                    <text>等待所有玩家就绪...</text>
+                </view>
+                <view class="num_prompt" wx:if="{{step2_ready && !step2_all_ready}}">
+                    <text>{{cur_step2_ready_num}}/{{num}}</text>
+                </view>
+                <button class="start_btn" style="width: 400rpx; margin-top:80rpx;"bindtap="first_night_lys" wx:if="{{step2_all_ready}}">进入黑夜</button>
+            </view>
+
+        </view>
+
+        <!-- 第三页：首夜操作：狼预守 -->
+        <view class="step_3" wx:if="{{step==3}}">
+            
+            <!-- 房主提示信息 -->
+            <view class="prompt_fz" wx:if="{{openid==creator}}"><text>你是房主哦~ 请大声说“天黑请闭眼”，然后依次主持守卫、狼人、预言家睁眼操作，请适当给出倒计时让相应的玩家及时确认闭眼，这三个环节结束后请大家睁眼点击确认</text></view>
+            <view class="prompt" style="text-align: center;" >
+                <text>— 你的身份是：{{roles[cur_role_id].role}} —</text>
+            </view>
+
+            <view class="manipulation">
+                <!-- 狼人界面 -->
+                <view class="first_night_lang" wx:if="{{cur_role_id==0 || cur_role_id==1 || cur_role_id==8}}">
+                    <view class="prompt_smaller">
+                        <text>请等待房主主持大家闭眼，商量战术并刀人，点击商量好要刀的人（不一致以点击确认的第一刀为准）：</text>
+                    </view>
+                    <!-- 遍历已经输入房间号加入对局的userInfos -->
+                    <view class="players" style="margin-top:50rpx">
+                        <view class="player_bar">
+                            <block wx:for="{{player_info}}" data-item="item" data-index="{{index}}" wx:if="{{!(index>2)}}">
+                            <view id="killing_{{index}}" class='{{index==temp_fn_killed?"player_selected":"player"}}' bindtap="fn_kill">
+                                <image class="avatar" src="{{item.avatarurl}}" ></image>
+                                <view class='icon_name'> <text>{{item.nickname}}</text> </view>
+                            </view>
+                            </block>
+                        </view>
+
+                        <view class="player_bar">
+                            <block wx:for="{{player_info}}" data-item="item" data-index="{{index}}" wx:if="{{!(index>2)}}">
+                            <view id="killing_{{index}}" class='{{index==temp_fn_killed?"player_selected":"player"}}' bindtap="fn_kill">
+                                <image class="avatar" src="{{item.avatarurl}}" ></image>
+                                <view class='icon_name'> <text>{{item.nickname}}</text> </view>
+                            </view>
+                            </block>
+                        </view>
+
+                        <view class="player_bar">
+                            <block wx:for="{{player_info}}" data-item="item" data-index="{{index}}" wx:if="{{(index>2)&&(!(index>5))}}">
+                            <view id="killing_{{index}}" class='{{index==temp_fn_killed?"player_selected":"player"}}' bindtap="fn_kill">
+                                <image class="avatar" src="{{item.avatarurl}}" ></image>
+                                <view class='icon_name'> <text>{{item.nickname}}</text> </view>
+                            </view>
+                            </block>
+                        </view>
+
+                        <view class="player_bar">
+                            <block wx:for="{{player_info}}" data-item="item" data-index="{{index}}" wx:if="{{(index>5)&&(!(index>8))}}">
+                            <view id="killing_{{index}}" class='{{index==temp_fn_killed?"player_selected":"player"}}' bindtap="fn_kill">
+                                <image class="avatar" src="{{item.avatarurl}}" ></image>
+                                <view class='icon_name'> <text>{{item.nickname}}</text> </view>
+                            </view>
+                            </block>
+                        </view>
+
+                        <view class="player_bar">
+                            <block wx:for="{{player_info}}" data-item="item" data-index="{{index}}" wx:if="{{(index>8)&&(!(index>11))}}">
+                            <view id="killing_{{index}}" class='{{index==temp_fn_killed?"player_selected":"player"}}' bindtap="fn_kill">
+                                <image class="avatar" src="{{item.avatarurl}}" ></image>
+                                <view class='icon_name'> <text>{{item.nickname}}</text> </view>
+                            </view>
+                            </block>
+                        </view>
+
+                        <view class="player_bar">
+                            <block wx:for="{{player_info}}" data-item="item" data-index="{{index}}" wx:if="{{(index>11)&&(!(index>14))}}">
+                            <view id="killing_{{index}}" class='{{index==temp_fn_killed?"player_selected":"player"}}' bindtap="fn_kill">
+                                <image class="avatar" src="{{item.avatarurl}}" ></image>
+                                <view class='icon_name'> <text>{{item.nickname}}</text> </view>
+                            </view>
+                            </block>
+                        </view>
+
+                    </view>
+
+                    <!-- 确认按钮 -->
+                    <view class="btn_container">
+                        <button class="start_btn" style="width: 400rpx; margin-top:80rpx;"bindtap="fn_kill_confirm">确认击杀 {{}}</button>
+                    </view>
+
+                </view>
+
+
+                <!-- 预言家界面 -->
+                <view class="first_night_yu" wx:if="{{cur_role_id==2}}">
+                        <view wx:if="{{fn_investigated==100}}">
+                        <view class="prompt_smaller" wx:if="{{!investigating}}"><text>请等待房主主持大家闭眼，在你的环节点击你要验的人：</text></view>
+                        <!-- 遍历已经输入房间号加入对局的userInfos -->
+                        <view class="players" wx:if="{{!investigating}}" style="margin-top:50rpx">
+                            <view class="player_bar">
+                                <block wx:for="{{player_info}}" data-item="item" data-index="{{index}}" wx:if="{{!(index>2)}}">
+                                <view id="investigating_{{index}}" class='{{index==temp_fn_investigated?"player_selected":"player"}}' bindtap="fn_inv">
+                                    <image class="avatar" src="{{item.avatarurl}}" ></image>
+                                    <view class='icon_name'> <text>{{item.nickname}}</text> </view>
+                                </view>
+                                </block>
+                            </view>
+
+                            <view class="player_bar">
+                                <block wx:for="{{player_info}}" data-item="item" data-index="{{index}}" wx:if="{{(index>2)&&(!(index>5))}}">
+                                <view id="investigating_{{index}}" class='{{index==temp_fn_investigated?"player_selected":"player"}}' bindtap="fn_inv">
+                                    <image class="avatar" src="{{item.avatarurl}}" ></image>
+                                    <view class='icon_name'> <text>{{item.nickname}}</text> </view>
+                                </view>
+                                </block>
+                            </view>
+
+                            <view class="player_bar">
+                                <block wx:for="{{player_info}}" data-item="item" data-index="{{index}}" wx:if="{{(index>5)&&(!(index>8))}}">
+                                <view id="investigating_{{index}}" class='{{index==temp_fn_investigated?"player_selected":"player"}}' bindtap="fn_inv">
+                                    <image class="avatar" src="{{item.avatarurl}}" ></image>
+                                    <view class='icon_name'> <text>{{item.nickname}}</text> </view>
+                                </view>
+                                </block>
+                            </view>
+
+                            <view class="player_bar">
+                                <block wx:for="{{player_info}}" data-item="item" data-index="{{index}}" wx:if="{{(index>8)&&(!(index>11))}}">
+                                <view id="investigating_{{index}}" class='{{index==temp_fn_investigated?"player_selected":"player"}}' bindtap="fn_inv">
+                                    <image class="avatar" src="{{item.avatarurl}}" ></image>
+                                    <view class='icon_name'> <text>{{item.nickname}}</text> </view>
+                                </view>
+                                </block>
+                            </view>
+
+                            <view class="player_bar">
+                                <block wx:for="{{player_info}}" data-item="item" data-index="{{index}}" wx:if="{{(index>11)&&(!(index>14))}}">
+                                <view id="investigating_{{index}}" class='{{index==temp_fn_investigated?"player_selected":"player"}}' bindtap="fn_inv">
+                                    <image class="avatar" src="{{item.avatarurl}}" ></image>
+                                    <view class='icon_name'> <text>{{item.nickname}}</text> </view>
+                                </view>
+                                </block>
+                            </view>
+                        </view>
+
+                        <!-- 确认按钮 -->
+                        <view class="btn_container">
+                            <button class="start_btn" style="width: 400rpx; margin-top:80rpx;"bindtap="fn_investigating" wx:if="{{!investigating}}">确认查验 {{}}</button>
+                        </view>
+                </view>
+
+                    <!-- 查验结果 -->
+                    <view class="prompt_smaller" wx:if="{{temp_fn_investigated!=100 && investigating}}"><text>你要验的人：{{fn_inv_nn}}，他的身份是：</text></view>
+                    <view class="prompt" wx:if="{{temp_fn_investigated!=100 && investigating}}" style="text-align:center;margin-top:100rpx;margin-bottom: 100rpx;"><text style="font-size:20pt">{{fn_inv_ans}}</text></view>
+
+                    <!-- 确认按钮 -->
+                    <view class="btn_container" wx:if="{{investigating}}">
+                        <button class="start_btn" style="width: 400rpx; margin-top:80rpx;"bindtap="fn_inv_confirm">确 认</button>
+                    </view>                    
+
+                </view>
+                
+                <!-- 守卫界面 -->
+                <view class="first_night_shou" wx:if="{{cur_role_id==5}}">
+                    <view class="prompt_smaller" wx:if="{{fn_guarded==100}}"><text>请等待房主主持大家闭眼，狼人商量刀人，在你的环节点击你要守的人：</text></view>
+                    <!-- 遍历已经输入房间号加入对局的userInfos -->
+                    <view class="players" style="margin-top:50rpx">
+                        <view class="player_bar">
+                            <block wx:for="{{player_info}}" data-item="item" data-index="{{index}}" wx:if="{{!(index>2)}}">
+                            <view id="guarding_{{index}}" class='{{index==temp_fn_guarded?"player_selected":"player"}}' bindtap="fn_guard">
+                                <image class="avatar" src="{{item.avatarurl}}" ></image>
+                                <view class='icon_name'> <text>{{item.nickname}}</text> </view>
+                            </view>
+                            </block>
+                        </view>
+
+                        <view class="player_bar">
+                            <block wx:for="{{player_info}}" data-item="item" data-index="{{index}}" wx:if="{{(index>2)&&(!(index>5))}}">
+                            <view id="guarding_{{index}}" class='{{index==temp_fn_guarded?"player_selected":"player"}}' bindtap="fn_guard">
+                                <image class="avatar" src="{{item.avatarurl}}" ></image>
+                                <view class='icon_name'> <text>{{item.nickname}}</text> </view>
+                            </view>
+                            </block>
+                        </view>
+
+                        <view class="player_bar">
+                            <block wx:for="{{player_info}}" data-item="item" data-index="{{index}}" wx:if="{{(index>5)&&(!(index>8))}}">
+                            <view id="guarding_{{index}}" class='{{index==temp_fn_guarded?"player_selected":"player"}}' bindtap="fn_guard">
+                                <image class="avatar" src="{{item.avatarurl}}" ></image>
+                                <view class='icon_name'> <text>{{item.nickname}}</text> </view>
+                            </view>
+                            </block>
+                        </view>
+
+                        <view class="player_bar">
+                            <block wx:for="{{player_info}}" data-item="item" data-index="{{index}}" wx:if="{{(index>8)&&(!(index>11))}}">
+                            <view id="guarding_{{index}}" class='{{index==temp_fn_guarded?"player_selected":"player"}}' bindtap="fn_guard">
+                                <image class="avatar" src="{{item.avatarurl}}" ></image>
+                                <view class='icon_name'> <text>{{item.nickname}}</text> </view>
+                            </view>
+                            </block>
+                        </view>
+
+                        <view class="player_bar">
+                            <block wx:for="{{player_info}}" data-item="item" data-index="{{index}}" wx:if="{{(index>11)&&(!(index>14))}}">
+                            <view id="guarding_{{index}}" class='{{index==temp_fn_guarded?"player_selected":"player"}}' bindtap="fn_guard">
+                                <image class="avatar" src="{{item.avatarurl}}" ></image>
+                                <view class='icon_name'> <text>{{item.nickname}}</text> </view>
+                            </view>
+                            </block>
+                        </view>
+
+                    </view>
+
+                    <!-- 确认按钮 -->
+                    <view class="btn_container">
+                        <button class="start_btn" style="width: 400rpx; margin-top:80rpx;"bindtap="fn_guard_confirm">确认守护 {{}}</button>
+                    </view>
+                </view>
+                
+                <!-- 其他角色界面 -->
+                <view class="first_night_qita" wx:if="{{cur_role_id!=0 && cur_role_id!=1 && cur_role_id!=2 && cur_role_id!=5 && cur_role_id!=8}}">
+                    <view class="prompt_smaller">
+                        <text>请等待房主主持大家闭眼，狼人、守卫、预言家行动，你无需操作，请假装自己有身份的样子玩玩手机，迷惑敌人~</text>
+                    </view>
+
+                    <!-- 确认按钮 -->
+                    <view class="btn_container">
+                        <button class="start_btn" style="width: 400rpx; margin-top:200rpx;"bindtap="fn_other_confirm_1" wx:if="{{step2_all_ready}}">确 认</button>
+                    </view>
+                </view>
+            
+            </view>
+
+        </view>
+
+        <!-- 第四页：首夜操作：女巫 -->
+        <view class="step_4" wx:if="{{step==4}}">
+            
+            <!-- 房主提示信息 -->
+            <view class="prompt_fz" wx:if="{{openid==creator}}"><text>你是房主哦~ 请主持大家再次闭眼，“女巫请睁眼，女巫请操作”，并倒计时让女巫确认闭眼</text></view>
+            <view class="prompt" style="text-align: center;" >
+                <text>— 你的身份是：{{roles[cur_role_id].role}} —</text>
+            </view>
+
+            <view class="manipulation">
+                <!-- 其他角色界面 -->
+                <view class="first_night_lang" wx:if="{{cur_role_id!=3}}">
+                    <view class="prompt_smaller">
+                        <text>女巫环节，你无需操作，请观察其他玩家/自由表演</text>
+                    </view>
+
+                    <!-- 确认按钮 -->
+                    <view class="btn_container">
+                        <button class="start_btn" style="width: 400rpx; margin-top:200rpx;"bindtap="fn_other_confirm_2">确 认</button>
+                    </view>
+
+                </view>
+
+
+                <!-- 女巫界面 -->
+                <view class="first_night_nw" wx:if="{{cur_role_id==3}}">
+                    <view class="prompt_smaller" wx:if="{{cur_role_id==3 }}"><text>今晚被刀的玩家是：{{fn_killed_nn}}，你要使用解药吗？</text></view>
+                    <view class="radio-g">
+                        <l-radio-group bind:linchange="fn_heal">
+                            <l-radio key="1" disabled="{{nw_killed}}">使用</l-radio>
+                            <l-radio key="0">不使用</l-radio>
+                        </l-radio-group>
+                    </view>
+                    <view class="num_prompt" wx:if="{{nw_killed}}">
+                        <text>—— 女巫不能自救 ——</text>
+                    </view>
+                    <!-- 确认按钮 -->
+                    <view class="btn_container" wx:if="{{!nw_killed && fn_healed==fn_killed}}">
+                        <button class="start_btn" style="width: 400rpx; margin-top:80rpx;"bindtap="fn_heal_confirm">确认解救 {{}}</button>
+                    </view>
+
+                    <view wx:if="{{showDu}}" style="margin-top: 100rpx;">
+                        <view class="prompt_smaller"><text>你要使用毒药吗？</text></view>
+                        <!-- 遍历已经输入房间号加入对局的userInfos -->
+                        <view class="players" style="margin-top:50rpx">
+                            <view class="player_bar">
+                                <block wx:for="{{player_info}}" data-item="item" data-index="{{index}}" wx:if="{{!(index>2)}}">
+                                <view id="du_{{index}}" class='{{index==temp_fn_poisoned?"player_selected":"player"}}' bindtap="fn_du">
+                                    <image class="avatar" src="{{item.avatarurl}}" ></image>
+                                    <view class='icon_name'> <text>{{item.nickname}}</text> </view>
+                                </view>
+                                </block>
+                            </view>
+
+                            <view class="player_bar">
+                                <block wx:for="{{player_info}}" data-item="item" data-index="{{index}}" wx:if="{{(index>2)&&(!(index>5))}}">
+                                <view id="du_{{index}}" class='{{index==temp_fn_poisoned?"player_selected":"player"}}' bindtap="fn_du">
+                                    <image class="avatar" src="{{item.avatarurl}}" ></image>
+                                    <view class='icon_name'> <text>{{item.nickname}}</text> </view>
+                                </view>
+                                </block>
+                            </view>
+
+                            <view class="player_bar">
+                                <block wx:for="{{player_info}}" data-item="item" data-index="{{index}}" wx:if="{{(index>5)&&(!(index>8))}}">
+                                <view id="du_{{index}}" class='{{index==temp_fn_poisoned?"player_selected":"player"}}' bindtap="fn_du">
+                                    <image class="avatar" src="{{item.avatarurl}}" ></image>
+                                    <view class='icon_name'> <text>{{item.nickname}}</text> </view>
+                                </view>
+                                </block>
+                            </view>
+
+                            <view class="player_bar">
+                                <block wx:for="{{player_info}}" data-item="item" data-index="{{index}}" wx:if="{{(index>8)&&(!(index>11))}}">
+                                <view id="du_{{index}}" class='{{index==temp_fn_poisoned?"player_selected":"player"}}' bindtap="fn_du">
+                                    <image class="avatar" src="{{item.avatarurl}}" ></image>
+                                    <view class='icon_name'> <text>{{item.nickname}}</text> </view>
+                                </view>
+                                </block>
+                            </view>
+
+                            <view class="player_bar">
+                                <block wx:for="{{player_info}}" data-item="item" data-index="{{index}}" wx:if="{{(index>11)&&(!(index>14))}}">
+                                <view id="du_{{index}}" class='{{index==temp_fn_poisoned?"player_selected":"player"}}' bindtap="fn_du">
+                                    <image class="avatar" src="{{item.avatarurl}}" ></image>
+                                    <view class='icon_name'> <text>{{item.nickname}}</text> </view>
+                                </view>
+                                </block>
+                            </view>
+
+                        </view>
+
+                        <!-- 确认按钮 -->
+                        <view class="btn_container">
+                            <button class="start_btn" style="width: 400rpx; margin-top:80rpx;"bindtap="fn_du_confirm">确认撒毒 {{}}</button>
+                        </view>
+                    </view>
+
+                </view>
+            
+            </view>
+
+        </view>
+
+        <!-- 第五页：警长竞选、公投 -->
+        <view class="step_5" wx:if="{{step==5}}">
+        <!-- 房主 -->
+        <view wx:if="{{openid==creator}}">            
+            <!-- 房主提示信息 -->
+            <view class="prompt_fz" wx:if="{{openid==creator}}"><text>你是房主哦~ 请让大家点击“确认”，主持警长竞选环节，待警徽落定后点击查看并公布昨夜死讯，主持公投环节~ 随后请点击选择一位死亡的玩家继续担任上帝（一般是被公投出局的玩家），该玩家将获得全部游戏信息，接替你和本程序继续担任上帝~</text></view>
+            <!-- 确认按钮 -->
+            <view class="btn_container" wx:if="{{!showInfo}}">
+                <button class="start_btn" style="width: 400rpx; margin-top:60rpx; margin-bottom: 60rpx;"   bindtap="see_fn_info">查看昨夜死讯</button>
+            </view> 
+            <!-- 死讯 -->
+            <view wx:if="{{showInfo}}">
+                <view class="prompt" style="text-align: center;margin-bottom:80rpx;margin-top: 80rpx;">
+                    <text>昨夜：{{info_str}}</text>
+                </view>
+            </view>
+
+
+            <!-- 公投后：选择一位公投出局或者死去的玩家成为继任上帝 -->
+            <!-- 房主提示信息 -->
+            <view class="prompt_fz" wx:if="{{openid==creator}}"><text>公投结果产生后，请点击公投出局的玩家（或者首夜死亡的玩家），该玩家将获得全部游戏信息，接替你和本程序继续担任上帝~</text></view>
+            <view class="players" style="margin-top:50rpx">
+                <view class="player_bar">
+                    <block wx:for="{{player_info}}" data-item="item" data-index="{{index}}" wx:if="{{!(index>2)}}">
+                    <view id="god_{{index}}" class='{{index==temp_god?"player_selected":"player"}}' bindtap="bcm_god">
+                        <image class="avatar" src="{{item.avatarurl}}" ></image>
+                        <view class='icon_name'> <text>{{item.nickname}}</text> </view>
+                    </view>
+                    </block>
+                </view>
+
+                <view class="player_bar">
+                    <block wx:for="{{player_info}}" data-item="item" data-index="{{index}}" wx:if="{{(index>2)&&(!(index>5))}}">
+                    <view id="god_{{index}}" class='{{index==temp_god?"player_selected":"player"}}' bindtap="bcm_god">
+                        <image class="avatar" src="{{item.avatarurl}}" ></image>
+                        <view class='icon_name'> <text>{{item.nickname}}</text> </view>
+                    </view>
+                    </block>
+                </view>
+
+                <view class="player_bar">
+                    <block wx:for="{{player_info}}" data-item="item" data-index="{{index}}" wx:if="{{(index>5)&&(!(index>8))}}">
+                    <view id="god_{{index}}" class='{{index==temp_god?"player_selected":"player"}}' bindtap="bcm_god">
+                        <image class="avatar" src="{{item.avatarurl}}" ></image>
+                        <view class='icon_name'> <text>{{item.nickname}}</text> </view>
+                    </view>
+                    </block>
+                </view>
+
+                <view class="player_bar">
+                    <block wx:for="{{player_info}}" data-item="item" data-index="{{index}}" wx:if="{{(index>8)&&(!(index>11))}}">
+                    <view id="god_{{index}}" class='{{index==temp_god?"player_selected":"player"}}' bindtap="bcm_god">
+                        <image class="avatar" src="{{item.avatarurl}}" ></image>
+                        <view class='icon_name'> <text>{{item.nickname}}</text> </view>
+                    </view>
+                    </block>
+                </view>
+
+                <view class="player_bar">
+                    <block wx:for="{{player_info}}" data-item="item" data-index="{{index}}" wx:if="{{(index>11)&&(!(index>14))}}">
+                    <view id="god_{{index}}" class='{{index==temp_god?"player_selected":"player"}}' bindtap="bcm_god">
+                        <image class="avatar" src="{{item.avatarurl}}" ></image>
+                        <view class='icon_name'> <text>{{item.nickname}}</text> </view>
+                    </view>
+                    </block>
+                </view>
+
+            </view>
+
+            <!-- 确认按钮 -->
+            <view class="btn_container">
+                <button class="start_btn" style="width: 400rpx; margin-top:80rpx;"bindtap="fn_night_end">确认: {{god_nn}} </button>
+            </view>
+
+        </view>
+
+        <!-- 其他玩家 -->
+        <view wx:if="{{openid!=creator}}">    
+            <view class="prompt_smaller">
+                <text>请点击确认，等待房主主持警长竞选、公布死讯、发言公投环节；猎人、狼王、白狼王在确认后将看到昨夜是否被毒的信息~</text>
+            </view>       
+            <!-- 确认按钮 -->
+            <view class="btn_container">
+                <button class="start_btn" style="width: 400rpx; margin-top:200rpx;"bindtap="fn_night_end">确认天亮</button>
+            </view> 
+
+        </view>
+
+        </view>
+
+        <!-- 第六页：首夜结束 -->
+        <view class="step_6" wx:if="{{step==6}}">
+
+            <!-- 猎人信息 -->
+            <view class="prompt" style="margin:30rpx;margin-bottom: 60rpx;" wx:if="{{cur_role_id==4}}">
+                <text style="font-size: 12pt;">你是猎人，昨夜你：</text>
+                <text wx:if="{{!lr_poisoned}}" style="font-size: 12pt;">没有被毒，白天若出局，可以使用技能</text>
+                <text wx:if="{{lr_poisoned}}" style="font-size: 12pt;">被毒了，不能使用技能</text>
+            </view>
+
+            <!-- 狼王信息 -->
+            <view class="prompt" style="margin:30rpx;margin-bottom: 60rpx;" wx:if="{{cur_role_id==0}}">
+                <text style="font-size: 12pt;">你是狼王，昨夜你：</text>
+                <text wx:if="{{!lw_poisoned}}" style="font-size: 12pt;">没有被毒，白天若出局，可以使用技能</text>
+                <text wx:if="{{lw_poisoned}}" style="font-size: 12pt;">被毒了，不能使用技能</text>
+            </view>
+
+            <!-- 白狼王信息 -->
+            <view class="prompt" style="margin:30rpx;margin-bottom: 60rpx;" wx:if="{{cur_role_id==4}}">
+                <text style="font-size: 12pt;">你是白狼王，昨夜你：</text>
+                <text wx:if="{{!blw_poisoned}}" style="font-size: 12pt;">没有被毒，白天若出局，可以使用技能</text>
+                <text wx:if="{{blw_poisoned}}" style="font-size: 12pt;">被毒了，不能使用技能</text>
+            </view>
+
+            <view class="prompt_fz" style="margin:30rpx;">
+                <text>本局游戏的自动上帝部分到此结束啦，警长选定公投出局玩家（继任上帝）后该玩家将看到“查看本局游戏全部信息”选项，后续会由出局玩家继续主持~ 本局首夜信息在游戏结束后可以在“历史对局”中查看，但是这个功能还没有开发呢 = w = 欢迎再次使用~</text>
+            </view>
+
+            <!-- 继任上帝信息 -->
+            <view wx:if="{{cur_number==next_god}}">
+                <view class="prompt_fz" style="margin:30rpx;">
+                    <text>恭喜你已出局，成为新任上帝~</text>
+                </view>   
+                <view class="btn_container" wx:if="{{!showAllInfo}}">
+                    <button class="start_btn" style="width: 400rpx; margin-top:80rpx;"bindtap="all_info">查看全部信息</button>
+                </view>
+                <view class="prompt" style="margin:30rpx;margin-top:60rpx" wx:if="{{showAllInfo}}">
+                <text style="font-size: 12pt;">{{all_info_str}}</text>
+            </view>
+            </view>
+
+            <view class="btn_container" wx:if="{{(cur_number==next_god && showAllInfo) ||cur_number!=next_god}}">
+                <button class="start_btn" style="width: 400rpx; margin-top:80rpx;"bindtap="exit">退 出</button>
+            </view>
+
+        </view>
+
+    </view>
+
+</view>
+

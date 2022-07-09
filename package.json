@@ -1,0 +1,16 @@
+{
+  "name": "tdesign-diy",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "lin-ui": "^0.9.10",
+    "miniprogram-api-promise": "^1.0.4",
+    "tdesign-miniprogram": "^0.12.0"
+  }
+}

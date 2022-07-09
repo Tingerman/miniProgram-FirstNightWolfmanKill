@@ -1,0 +1,291 @@
+/* pages/welcomepage/welcomepage.wxss */
+.container{
+    /* background-color: #f4eeff; */
+    background-color: #faf4ff;
+    min-height: 100vh;
+}
+
+.core{
+    text-align: center;
+}
+
+.title_box{
+    margin-top: 20rpx;
+}
+
+#lrs_icon{
+    /* width: 120rpx;
+    height:120rpx; */
+    width: 160rpx;
+    height:160rpx;
+    margin-right: 15rpx;
+    margin-top: 10rpx;
+}
+
+.title_box{
+    margin-top: 50rpx;
+}
+.title_box text{
+    font-family:'songti_title';
+    color:#424874;
+    font-weight: 700;
+    font-size: 28pt;
+}
+
+.title text{
+    font-family:'songti';
+    color:#424874;
+    font-weight: 700;
+    font-size: 20pt;
+}
+
+.title{
+    align-items: center;
+    margin-top: 0rpx;
+    overflow:visible;
+    text-align: center;
+    padding-bottom: 10%;
+}
+
+.button_box text{
+    font-family: 'songti';
+    color:#424874;
+    font-weight: 600;
+    font-size:17pt;
+}
+
+.cjwin{
+    display: none;
+}
+
+.win_text text{
+    font-family:"songti";
+    color:#424874;
+    font-weight: 600;
+    font-size:13pt;
+}
+
+.buttons button{
+    /* background-color:#faf4ff; */
+    background-color: transparent;
+    border-color:transparent;
+}
+
+.button{
+    margin-top: 30rpx;
+    border-color: transparent;
+}
+
+.pop-container{
+    background-color:transparent;
+    /* background-color: teal; */
+    height: 1300rpx;
+    width: 700rpx;
+    margin-top: 100rpx;
+    /* margin-top: -100rpx; */
+    align-items: center;
+    /* padding-left: 50rpx; */
+    overflow: hidden;
+
+}
+
+.l-popup{
+    overflow: hidden;
+}
+
+.title text{
+    overflow:visible;
+    position: relative;
+    z-index: 1;
+}
+
+.pop{
+    align-self: center;
+    background-color:white;
+    height: 1200rpx;
+    width: 600rpx;
+    /* margin-top: 0rpx; */
+    margin-top: -100rpx;
+    border-radius: 30rpx;
+    /* padding-left: 10%;
+    padding-right: 10%; */
+    padding-top: 12%;
+    padding-bottom: 10%;
+    overflow: hidden;
+    /* border-color: red;
+    border-width: thick; */
+    margin-left: 50rpx;
+    z-index: 0;
+    position: relative;
+
+}
+
+.input_bar{
+    display: flex;
+    flex-direction: row;
+    justify-content:space-between;
+    align-items: center;
+    width: 88%;
+    margin-left:6%;
+    margin-right:10%;
+    margin-top: 8%;
+    margin-bottom:8%;
+  }
+
+  .input_bar text{
+    font-family: 'songti';
+    color:#424874;
+    font-weight: 600;
+    font-size:14pt;
+}
+
+l-radio{
+    font-family:"songti";
+    font-weight: 600;
+    margin-left:10%;
+    margin-top: 10rpx;
+    align-items: center;
+}
+
+l-radio-group{
+    display: flex;
+    flex-direction: row;
+    justify-content:space-between;
+    align-items: center;
+    width: 90%;
+    /* margin-top: 5%; */
+    margin-bottom:5%;
+
+}
+
+.roles{
+
+
+}
+
+.btn_container{
+    background-color:transparent;
+    height:300rpx;
+    width:450rpx;
+    padding:10%;
+    display: flex;
+    justify-content:center;
+    align-items: center;
+    /* padding-top:20%;
+    width: 100%;
+    padding-left: 50%; */
+
+    font-family:'songti';
+    font-weight: 800;
+
+    flex-direction:column;
+}
+
+l-button{
+    margin-bottom: 20rpx;
+}
+
+.cancel {
+    background-color: #faf4ff;
+    color:#6867ac;
+    height: 80rpx;
+    font-size: 36rpx;
+    margin-bottom: 20rpx;
+    
+}
+
+.icon_name text{
+    font-family:'songti_title';
+    color:#424874;
+    font-weight: 200;
+    font-size: 11pt;
+    align-self: center;
+    
+}
+
+.icon_name{
+    align-items: center;
+    align-self: center;
+    text-align: center;
+    display: inline;
+}
+
+.roles image{
+    height: 70rpx;
+    width: 70rpx;
+    display: flex;
+    align-self:center;
+
+}
+
+.roles{
+    display:flex;
+    justify-content:center;
+    align-items: center;
+    margin-bottom: 15rpx;
+}
+
+.icon_with_name{
+    display:flex;
+    flex-direction: column;
+    background-color:transparent;
+    width: 30%;
+    align-self: center;
+    border-radius: 8rpx;
+
+
+}
+
+.icon_with_name_selected{
+    display:flex;
+    flex-direction: column;
+    background-color: #faf4ff;
+    width: 30%;
+    align-self: center;
+    border-radius: 8rpx;
+
+
+}
+
+
+
+.num_input{
+    margin-left:5rpx;
+    margin-right: 5rpx;
+    width: 600rpx;
+}
+
+.num_input_bar{
+    display: flex;
+    flex-direction: row;
+    justify-content:space-between;
+    align-items: center;
+    width: 75%;
+    margin-left:10%;
+    margin-right:10%;
+    margin-top: 15%;
+    margin-bottom:0;
+  }
+
+.input_text{
+    font-family: 'songti';
+    color:#424874;
+    font-weight: 600;
+    font-size:18pt;
+    text-align: center;
+    caret-color:#6867ac;
+    /* 这里想调一下输入字符的字间距，但是lin-UI好像覆盖不了，写在这里覆盖的是placeholder的间距，待解决 */
+    /* letter-spacing:50rpx; */
+}
+
+.underline{
+    /* background:#9a9a9a */
+    /* background可以设置背景，不单单是颜色 */
+    /* 不知道为什么覆盖不了，还是原先的background，待解决 */
+}
+
+.role_chosed{
+    /* 这里临时试颜色用的，实际用js做选中效果 */
+    background-color:  #faf4ff;
+    /* background-color:  red; */
+}

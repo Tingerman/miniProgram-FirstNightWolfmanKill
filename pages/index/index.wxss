@@ -1,0 +1,39 @@
+/**index.wxss**/
+.container{
+  /* background-color: #f4eeff; */
+  background-color: #faf4ff;
+  min-height: 100vh;
+}
+
+text{
+  font-family:'songti';
+  color:#424874;
+  /* font-weight: 700;
+  font-size: 20pt; */
+}
+
+.userinfo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #aaa;
+}
+
+.userinfo-avatar {
+  overflow: hidden;
+  width: 128rpx;
+  height: 128rpx;
+  margin: 20rpx;
+  border-radius: 50%;
+}
+
+.usermotto {
+  margin-top: 200px;
+}
+
+.usermotto text{
+  font-family:'songti';
+  color:#424874;
+  font-weight: 200;
+  font-size: 20pt;
+}

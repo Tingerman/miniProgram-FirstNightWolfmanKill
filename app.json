@@ -1,0 +1,18 @@
+{
+    "cloud": true,
+    "pages": [
+        "pages/welcomepage/welcomepage",
+        "pages/game_started/game_started",
+        "pages/gaming/gaming",
+        "pages/index/index"
+    ],
+    "window": {
+        "backgroundTextStyle": "light",
+        "navigationBarBackgroundColor": "#faf4ff",
+        "navigationBarTitleText": "自动上帝",
+        "navigationBarTextStyle": "black"
+    },
+    "style": "v2",
+    "sitemapLocation": "sitemap.json",
+    "lazyCodeLoading": "requiredComponents"
+}

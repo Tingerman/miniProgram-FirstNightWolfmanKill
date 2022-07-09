@@ -1,0 +1,413 @@
+/* pages/game_started.wxss */
+.container{
+    /* background-color: #f4eeff; */
+    background-color: #faf4ff;
+    min-height: 100vh;
+    /* 覆盖一下app.wxss的container */
+    padding-top: 60rpx;
+    padding-bottom: 140rpx;
+}
+
+.prompt text{
+    font-family:'songti';
+    color:#424874;
+    font-weight: 160;
+    font-size: 14pt;
+}
+
+.prompt{
+    /* background-color: green; */
+    margin-bottom: 15rpx;
+    margin-top: 35rpx;
+    
+}
+
+.prompt_smaller text{
+    /* font-family:'songti'; */
+    color:#424874;
+    font-weight: 120;
+    font-size: 12pt;
+
+    FONT-VARIANT: JIS04;
+    font-family: 'songti_xi';
+    letter-spacing: 1rpx;
+    letter-spacing: 2rpx;
+    font-size: 11pt;
+}
+
+.prompt_smaller{
+    /* background-color: green; */
+    margin:10rpx;
+    margin-bottom: 15rpx;
+    margin-top: 35rpx;
+    
+}
+
+.prompt_fz text{
+    font-family:'songti';
+    /* color:#424874; */
+    color:#6867ac;
+    /* color:#42487456; */
+    font-weight: 140;
+    font-size: 10pt;
+}
+
+.prompt_fz{
+    background-color:#faf4ff;
+    /* margin-bottom: 15rpx;
+    margin-top: 15rpx; */
+    border-radius: 15rpx;
+    padding:5%;
+    box-shadow:4rpx 4rpx 0rpx 0rpx #42487441;
+    margin-top: 8rpx;
+    margin-bottom: 16rpx;
+    
+}
+
+.num_prompt{
+    text-align: center;
+    margin-top:8rpx;
+}
+
+.num_prompt text{
+    font-family:'songti';
+    color:#42487456;
+    font-weight: 160;
+    font-size: 12pt;
+}
+
+.loading_prompt{
+    text-align: center;
+    margin-top: 100rpx;
+    align-self: center;
+}
+
+.loading_prompt text{
+    font-family:'songti';
+    color:#42487456;
+    font-weight: 160;
+    font-size: 40rpx;
+}
+
+.gaming_box{
+    /* background-color: #f4eeff; */
+    background-color: white;
+    /* background-color: red; */
+    min-height: 70vh;
+    /* margin-top: -7000rpx; */
+    padding-top:30rpx;
+    border-radius: 20rpx;
+    width: 70%;
+    padding:40rpx;
+    /* text-align: center; */
+    display: flex;
+    flex-direction: column;
+    overflow: scroll;
+
+  }
+  
+  .player text{
+    font-family:'songti';
+    /* color:#424874; */
+    color:#71748a;
+    align-self:center;
+    /* font-weight: 700;
+    font-size: 20pt; */
+  }
+
+  .player_selected text{
+    font-family:'songti';
+    /* color:#424874; */
+    color:#424874;
+    align-self:center;
+    /* font-size: larger; */
+    /* font-weight: 700;
+    font-size: 20pt; */
+  }
+
+  .players{
+      display:flex;
+      /* align-items: center; */
+      /* flex-direction: row; */
+      min-height: 50vh;
+      background-color: white;
+      /* background-color: green; */
+      justify-self: center;
+
+  }
+
+  open-data{
+    font-family:'songti';
+    color:#aaa;
+    align-self:center;
+    align-items: center;
+    /* font-weight: 700;
+    font-size: 20pt; */
+    text-align: center;
+  }
+
+  .player{
+      text-align: center;
+      width: 170rpx;
+      height: 220rpx;
+      border-radius: 26rpx;
+      margin-left: 2rpx;
+      margin-right:2rpx;
+      padding-bottom: 4rpx;
+  }
+
+  .player_selected{
+    text-align: center;
+    width: 170rpx;
+    height: 220rpx;
+    border-radius: 26rpx;
+    margin-left: 2rpx;
+    margin-right:2rpx;
+    background-color: #faf4ff;
+    padding-bottom: 4rpx;
+}
+  
+  .userinfo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #aaa;
+  }
+  
+  .userinfo-avatar {
+    overflow: hidden;
+    width: 128rpx;
+    height: 128rpx;
+    margin: 20rpx;
+    border-radius: 50%;
+  }
+  
+  .usermotto {
+    margin-top: 200px;
+  }
+  
+  .usermotto text{
+    font-family:'songti';
+    color:#424874;
+    font-weight: 200;
+    font-size: 20pt;
+  }
+
+  .btn_container{
+    background-color:transparent;
+    /* background-color:red; */
+    /* height:100rpx; */
+    /* width:100%; */
+    padding:1%;
+    display: flex;
+    justify-content:center;
+    align-items: center;
+    /* padding-top:20%;
+    width: 100%;
+    padding-left: 50%; */
+
+    font-family:'songti';
+    font-weight: 800;
+
+    flex-direction:column;
+
+}
+
+l-button{
+    margin-bottom: 20rpx;
+}
+
+.cancel_back {
+
+    background-color: #faf4ff;
+    color:#6867ac;
+    height: 80rpx;
+    font-size: 36rpx;
+    margin-bottom: 20rpx;
+    
+}
+
+.start_btn {
+    background-color: #6867ac;
+    color:white;
+    height: 80rpx;
+    font-size: 36rpx;
+    margin-bottom: 20rpx;
+    font-family: "songti";
+    align-self: center;
+    /* display: flex; */
+    text-align: center;
+    align-items: center;
+    
+}
+
+.start_btn_forbidden {
+    background-color: #6867ac73;
+    color:white;
+    height: 80rpx;
+    font-size: 36rpx;
+    margin-bottom: 20rpx;
+    font-family: "songti";
+    
+  }
+
+.confirm_btn {
+    /* background-color: #faf4ff;
+    color:#6867ac;
+    height: 80rpx;
+    font-size: 36rpx;
+    margin-bottom: 20rpx;
+    font-family: "songti"; */
+    /* border-style: solid; */
+
+    background-color: #424874;
+    /* background-color: #4248748e; */
+    color:white;
+    height: 80rpx;
+    font-size: 36rpx;
+    margin-bottom: 20rpx;
+    font-family: "songti";
+    
+}
+
+.avatar{
+    width: 128rpx;
+    height: 128rpx;
+    margin: 20rpx;
+    border-radius: 50%;
+}
+
+#question_icon{
+    width: 200rpx;
+    height:200rpx;
+    margin:50rpx;
+}
+
+.shenfen_icon{
+    width: 400rpx;
+    height:400rpx;
+    margin:5%;
+    align-self: center;
+    /* overflow:hidden; */
+    /* display:flex; */
+}
+
+.step_1{
+    display: flex;
+    align-items: center;
+    align-self: center;
+    flex-direction: column;
+}
+
+.step_2{
+    display: flex;
+    align-items: center;
+    align-self: center;
+    flex-direction: column;
+}
+
+.btn_shenfen{
+    width: 300rpx;
+    height: 300rpx;
+    border-radius: 20%;
+    /* background-color: #424874; */
+
+    border-color: #424874;
+    border-width: 14rpx;
+    border-style:solid;
+
+    background-color:#faf4ff;
+    align-items: center;
+    align-self: center;
+    display: flex;
+    flex-direction: column;
+    /* margin-top: 30%; */
+    margin-top: 140rpx;
+}
+
+.show_shenfen{
+    width: 400rpx;
+    height: 400rpx;
+    border-radius: 20%;
+    /* background-color: #424874; */
+
+    border-color: #424874;
+    border-width: 14rpx;
+    border-style:solid;
+
+    background-color:#faf4ff;
+    align-items: center;
+    align-self: center;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    margin-top: 20%;
+
+    padding:10%;
+
+}
+
+.btn_textbox text{
+    font-size: 44rpx;
+    text-align: center;
+    /* color: white; */
+    color:#424874;
+    /* margin-bottom: 100rpx; */
+
+}
+
+.btn_textbox {
+    font-size: 40rpx;
+    text-align: center;
+    color: white;
+    color:#424874;
+    margin-top: 100rpx;
+    align-self: center;
+
+}
+
+l-button{
+    margin-bottom: 20rpx;
+}
+
+l-radio{
+    font-family:"songti";
+    font-weight: 600;
+    margin-left:5%;
+    margin-right:5%;
+    margin-top: 10rpx;
+    align-items: center;
+}
+
+l-radio-group{
+    display: flex;
+    flex-direction: row;
+    justify-content:space-between;
+    align-items: center;
+    width: 90%;
+    /* margin-top: 5%; */
+    margin-bottom:5%;
+    margin-left: 10%;
+
+}
+
+.radio-g{
+    margin-top: 100rpx;
+    margin-bottom: 10rpx;
+}
+
+.icon_name text{
+    /* font-family: 'Monospaced Number,Chinese Quote,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,PingFang SC,Hiragino Sans GB,Microsoft YaHei,Helvetica Neue,Helvetica,Arial,sans-serif!important'; */
+    font-size: 11pt;
+    /* letter-spacing: 1pt; */
+  }
+
+  .player_bar{
+    display:flex;
+    /* align-items: center; */
+    /* flex-direction: column; */
+    background-color: white;
+    justify-self: center;
+    /* background-color: green; */
+
+}
